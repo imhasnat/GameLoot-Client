@@ -38,7 +38,8 @@ const AuthProvider = ({ children }) => {
     }
 
     const logout = () => {
-        return signOut(auth.currentUser);
+        localStorage.removeItem('accessToken');
+        return signOut(auth);
     }
 
     const value = {
