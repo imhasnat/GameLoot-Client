@@ -56,8 +56,8 @@ const SignUp = () => {
     }
 
     const saveUserDB = async (email, name, img, role) => {
-        console.log('img', img);
-        console.log('role', role);
+        // console.log('img', img);
+        // console.log('role', role);
         const user = { name, email, img, role };
         // save to Database
         try {

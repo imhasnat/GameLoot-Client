@@ -1,14 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { AuthContext } from '../../Contexts/AuthProvider/AuthProvider';
 
 const AddProducts = () => {
     const { user } = useContext(AuthContext);
-    const { register, handleSubmit, formState: { errors } } = useForm({
-        defaultValues: {
-            sellerName: user?.displayName,
-        }
-    });
+    const { register, handleSubmit, formState: { errors } } = useForm();
+
+    const imageHostKey = process.env.REACT_APP_imgbb_key;
+    const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
+
     const [categories, setCategories] = useState([]);
     useEffect(() => {
         fetch(`${process.env.REACT_APP_Server_URL}/categories`)
@@ -20,18 +21,73 @@ const AddProducts = () => {
 
     const handleAddProduct = data => {
         console.log(data);
-        const category = data.category
-        const condition = data.condition
-        const description = data.description
-        const location = data.location
-        const mobile = data.mobile
-        const orgprice = data.orgprice
-        const productImage = data.productImage
-        const resprice = data.resprice
-        const sellerName = data.sellerName
-        const title = data.title
-        const useYear = data.useYear
-        const puryear = data.year
+
+        const category_id = data.category;
+        const condition = data.condition;
+        const description = data.description;
+        const location = data.location;
+        const mobile = data.mobile;
+        const orgprice = data.orgprice;
+        const productImage = data.productImage[0];
+        const resprice = data.resprice;
+        const title = data.title;
+        const useYear = data.useYear;
+        const puryear = data.year;
+        const advertise = 'no';
+        const status = 'available';
+        const sellerName = user?.displayName;
+        const sellerEmail = user?.email;
+
+        const formData = new FormData();
+        formData.append('image', productImage);
+
+        fetch(url, {
+            method: 'POST',
+            body: formData
+        })
+            .then(res => res.json())
+            .then(async imgData => {
+                if (imgData.success) {
+                    console.log(imgData.data.url);
+                    const imageUrl = imgData.data.url;
+                    const productInfo = {
+                        sellerName,
+                        sellerEmail,
+                        category_id,
+                        title,
+                        condition,
+                        description,
+                        location,
+                        mobile,
+                        orgprice,
+                        resprice,
+                        useYear,
+                        puryear,
+                        imageUrl,
+                        advertise,
+                        status
+                    }
+                    try {
+                        const res = await fetch(`${process.env.REACT_APP_Server_URL}/addproduct`, {
+                            method: 'POST',
+                            headers: {
+                                'content-type': 'application/json'
+                            },
+                            body: JSON.stringify(productInfo)
+                        });
+                        const data = await res.json();
+                        console.log(data);
+                        if (data.acknowledged) {
+                            toast.success('Product Added Successfully');
+                        }
+                    }
+                    catch (err) {
+                        console.log(err.message);
+                    }
+
+                }
+            })
+            .catch(err => console.log(err))
 
     }
 
@@ -42,14 +98,6 @@ const AddProducts = () => {
                     <div className='w-96 p-7 rounded-lg bg-white m-3'>
                         <h2 className='text-xl text-center'>Add your product</h2>
                         <form onSubmit={handleSubmit(handleAddProduct)}>
-                            <div className="form-control w-full max-w-xs">
-                                <label className="label"> <span className="label-text">Seller Name</span></label>
-                                <input
-                                    {...register("sellerName")}
-                                    type="text"
-                                    defaultValue={user?.displayName} disabled
-                                    className="input input-bordered w-full max-w-xs" />
-                            </div>
                             <div className="form-control w-full max-w-xs">
                                 <label className="label"> <span className="label-text">Product title</span></label>
                                 <input
@@ -141,8 +189,8 @@ const AddProducts = () => {
                                     {...register("productImage", { required: 'image is required' })}
                                     required
                                     type='file'
-                                    id='image'
-                                    name='image'
+                                    id='productImage'
+                                    name='productImage'
                                     accept='image/*'
                                     className="file-input file-input-bordered file-input-sm w-full max-w-xs"
                                 />
