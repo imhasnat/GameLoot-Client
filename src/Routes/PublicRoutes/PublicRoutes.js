@@ -6,6 +6,7 @@ import AddProducts from "../../Pages/Dashboard/AddProducts";
 
 
 import ErrorPage from "../../Pages/ErrorPage/ErrorPage";
+import Home from "../../Pages/Home/Home";
 import Login from "../../Pages/Login/Login";
 import SignUp from "../../Pages/SignUp/SignUp";
 
@@ -17,7 +18,7 @@ export const router = createBrowserRouter([
         children: [
             {
                 path: '/',
-                element: <Login></Login>
+                element: <Home></Home>
             },
             {
                 path: '/login',

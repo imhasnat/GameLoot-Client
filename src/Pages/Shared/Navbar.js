@@ -18,7 +18,7 @@ const Navbar = () => {
             <li><Link to={'/login'}>Login</Link></li>
             <li><Link to={'/signup'}>SignUp</Link></li>
             <li><Link><button onClick={handleLogout}>Logout</button></Link></li>
-            <li><Link to={'/dashboard'}>Dashboard</Link></li>
+            <li><Link to={'/dashboard/addproduct'}>Dashboard</Link></li>
             <li>
                 <div className="drawer-content">
                     <label htmlFor="dashboard" className="lg:hidden">Dashboa</label>

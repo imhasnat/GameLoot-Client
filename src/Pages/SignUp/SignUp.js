@@ -105,14 +105,14 @@ const SignUp = () => {
                                 type="text"
                                 className="input input-bordered w-full max-w-xs" />
 
-                            {errors.name && <p className='text-red-600'>{errors.email?.message}</p>}
+                            {errors.name && <p className='text-red-600'>{errors.name?.message}</p>}
                         </div>
                         <div className="form-control w-full max-w-xs">
                             <label className="label"><span className="label-text">User Role</span></label>
                             <select
                                 {...register("role")}
                                 className="select select-bordered">
-                                <option value={'user'}>User</option>
+                                <option value={'buyer'}>Buyer</option>
                                 <option value={'seller'}>Seller</option>
                             </select>
                         </div>
