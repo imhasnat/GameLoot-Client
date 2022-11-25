@@ -3,7 +3,7 @@ import toast from 'react-hot-toast';
 import { AuthContext } from '../../../Contexts/AuthProvider/AuthProvider';
 
 const BookingModal = ({ product, setProduct }) => {
-    const { _id, title, orgprice, status } = product;
+    const { _id, title, orgprice, status, imageUrl } = product;
     const { user } = useContext(AuthContext);
 
     const handleBooking = event => {
@@ -19,7 +19,7 @@ const BookingModal = ({ product, setProduct }) => {
         const productId = _id;
         console.log(userName, email, productName, price, mobile, location, paid, productId, status);
 
-        const booking = { userName, email, productName, price, mobile, location, paid, productId, status };
+        const booking = { userName, email, productName, price, mobile, location, paid, imageUrl, productId, status };
 
         fetch(`${process.env.REACT_APP_Server_URL}/booking`, {
             method: 'POST',

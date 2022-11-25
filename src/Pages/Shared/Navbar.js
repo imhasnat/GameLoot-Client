@@ -19,6 +19,7 @@ const Navbar = () => {
             <li><Link><button onClick={handleLogout}>Logout</button></Link></li>
             <li><Link to={'/dashboard/addproduct'}>Add Product</Link></li>
             <li><Link to={'/dashboard/myproducts'}>My Products</Link></li>
+            <li><Link to={'/dashboard/myorders'}>My Orders</Link></li>
             <li>
                 <div className="drawer-content">
                     <label htmlFor="dashboard" className="lg:hidden">Dashboa</label>
