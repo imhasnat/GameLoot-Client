@@ -21,14 +21,16 @@ const ShowProducts = () => {
 
     return (
         <div>
-            {
-                products?.map(product =>
-                    <ProductCard
-                        key={product._id}
-                        product={product}
-                    >
-                    </ProductCard>)
-            }
+            <div className='grid grid-cols-3 gap-3'>
+                {
+                    products?.map(product =>
+                        <ProductCard
+                            key={product._id}
+                            product={product}
+                        >
+                        </ProductCard>)
+                }
+            </div>
         </div>
     );
 };
