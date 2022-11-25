@@ -33,8 +33,6 @@ const AddProducts = () => {
         const title = data.title;
         const useYear = data.useYear;
         const puryear = data.year;
-        const advertise = 'no';
-        const status = 'available';
         const sellerName = user?.displayName;
         const sellerEmail = user?.email;
 
@@ -64,11 +62,12 @@ const AddProducts = () => {
                         useYear,
                         puryear,
                         imageUrl,
-                        advertise,
-                        status
+                        advertise: false,
+                        status: true,
+                        date: new Date()
                     }
                     try {
-                        const res = await fetch(`${process.env.REACT_APP_Server_URL}/addproduct`, {
+                        const res = await fetch(`${process.env.REACT_APP_Server_URL}/products`, {
                             method: 'POST',
                             headers: {
                                 'content-type': 'application/json',

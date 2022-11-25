@@ -65,8 +65,19 @@ const SignUp = () => {
     }
 
     const saveUserDB = async (email, name, img, role) => {
-        // console.log('role', role);
-        const user = { name, email, img, role };
+        let user;
+        console.log('role', role);
+        if (role === 'seller') {
+            user = {
+                name, email, img, role,
+                verification: false,
+            };
+        }
+        else {
+            user = { name, email, img, role };
+        }
+        console.log(user);
+
         // save to Database
         try {
             const res = await fetch(`${process.env.REACT_APP_Server_URL}/users`, {

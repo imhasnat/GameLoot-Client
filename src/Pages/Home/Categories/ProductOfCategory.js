@@ -10,7 +10,7 @@ const ProductOfCategory = () => {
     const { data: categoryProducts = [] } = useQuery({
         queryKey: ['categoryProducts'],
         queryFn: async () => {
-            const res = await fetch(`${process.env.REACT_APP_Server_URL}/category/${id}`);
+            const res = await fetch(`${process.env.REACT_APP_Server_URL}/products/${id}`);
             const data = await res.json();
             return data
         }
