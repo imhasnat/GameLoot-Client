@@ -1,10 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import BookingModal from './BookingModal';
 import ProductCard from './ProductCard';
 
 const ProductOfCategory = () => {
     const { id } = useParams();
+    const [product, setProduct] = useState(null)
     const { data: categoryProducts = [] } = useQuery({
         queryKey: ['categoryProducts'],
         queryFn: async () => {
@@ -22,8 +24,18 @@ const ProductOfCategory = () => {
                         <ProductCard
                             key={product._id}
                             product={product}
+                            setProduct={setProduct}
                         >
                         </ProductCard>)
+                }
+            </div>
+            <div>
+                {
+                    product &&
+                    <BookingModal
+                        product={product}
+                        setProduct={setProduct}
+                    ></BookingModal>
                 }
             </div>
         </div>
