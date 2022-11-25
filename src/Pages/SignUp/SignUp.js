@@ -24,20 +24,21 @@ const SignUp = () => {
             body: formData
         })
             .then(res => res.json())
-            .then(imgData => {
+            .then(async imgData => {
                 if (imgData.success) {
                     console.log(imgData.data.url);
                     const imageUrl = imgData.data.url;
 
-                    createUser(data.email, data.password)
+                    await createUser(data.email, data.password)
                         .then(async result => {
                             const user = result.user;
-                            // console.log(result.user);
+                            console.log(result.user);
                             toast.success('User created Successfully');
                             const userInfo = {
                                 displayName: data.name,
                                 photoURL: imageUrl
                             }
+                            console.log(userInfo``);
                             await updateUser(userInfo)
                                 .then(() => {
                                     setUser(user);
@@ -47,9 +48,6 @@ const SignUp = () => {
                                 .catch(err => {
                                     console.error(err.message);
                                     setSignupError(err);
-                                })
-                                .finally(() => {
-                                    setLoading(false)
                                 })
                         })
                         .catch(err => {
@@ -67,7 +65,6 @@ const SignUp = () => {
     }
 
     const saveUserDB = async (email, name, img, role) => {
-        // console.log('img', img);
         // console.log('role', role);
         const user = { name, email, img, role };
         // save to Database

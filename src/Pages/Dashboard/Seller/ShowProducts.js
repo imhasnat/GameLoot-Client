@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
 import { AuthContext } from '../../../Contexts/AuthProvider/AuthProvider';
-import ProductCard from './ProductCard';
+import ProductCard from '../../Home/Categories/ProductCard';
 
 const ShowProducts = () => {
     const { user } = useContext(AuthContext);
@@ -23,12 +23,12 @@ const ShowProducts = () => {
         <div>
             <div className='grid grid-cols-3 gap-3'>
                 {
-                    products?.map(product =>
-                        <ProductCard
-                            key={product._id}
-                            product={product}
-                        >
-                        </ProductCard>)
+                    // products?.map(product =>
+                    //     <ProductCard
+                    //         key={product._id}
+                    //         product={product}
+                    //     >
+                    //     </ProductCard>)
                 }
             </div>
         </div>

@@ -8,7 +8,7 @@ const Category = ({ category }) => {
             <div className="card-body">
                 <h2 className="card-title">{category_name}</h2>
                 <div className="card-actions justify-end">
-                    <Link to={'/'}><button className="btn btn-primary">Explore</button></Link>
+                    <Link to={`/category/${_id}`}><button className="btn btn-primary">Explore</button></Link>
                 </div>
             </div>
         </div>
