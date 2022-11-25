@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { AuthContext } from '../../Contexts/AuthProvider/AuthProvider';
+import { AuthContext } from '../../../Contexts/AuthProvider/AuthProvider';
 
 const AddProducts = () => {
     const { user } = useContext(AuthContext);
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit } = useForm();
 
     const imageHostKey = process.env.REACT_APP_imgbb_key;
     const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
@@ -71,7 +71,8 @@ const AddProducts = () => {
                         const res = await fetch(`${process.env.REACT_APP_Server_URL}/addproduct`, {
                             method: 'POST',
                             headers: {
-                                'content-type': 'application/json'
+                                'content-type': 'application/json',
+                                authorization: `bearer ${localStorage.getItem('accessToken')}`
                             },
                             body: JSON.stringify(productInfo)
                         });
@@ -186,7 +187,7 @@ const AddProducts = () => {
                             <div className="form-control w-full max-w-xs mb-4">
                                 <label className="label"><span className="label-text">Product Image</span></label>
                                 <input
-                                    {...register("productImage", { required: 'image is required' })}
+                                    {...register("productImage")}
                                     required
                                     type='file'
                                     id='productImage'
@@ -196,9 +197,6 @@ const AddProducts = () => {
                                 />
                             </div>
                             <input className='btn text-white transform bg-purple-500 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600 w-full' value="Add product" type="submit" />
-                            <div>
-                                {/* {signupError && <p className='text-red-600'>{signupError}</p>} */}
-                            </div>
                         </form>
                     </div>
                 </div>

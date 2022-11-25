@@ -18,7 +18,8 @@ const Navbar = () => {
             <li><Link to={'/login'}>Login</Link></li>
             <li><Link to={'/signup'}>SignUp</Link></li>
             <li><Link><button onClick={handleLogout}>Logout</button></Link></li>
-            <li><Link to={'/dashboard/addproduct'}>Dashboard</Link></li>
+            <li><Link to={'/dashboard/addproduct'}>Add Product</Link></li>
+            <li><Link to={'/dashboard/myproducts'}>My Products</Link></li>
             <li>
                 <div className="drawer-content">
                     <label htmlFor="dashboard" className="lg:hidden">Dashboa</label>
@@ -47,15 +48,26 @@ const Navbar = () => {
                 </div>
                 <div className='navbar-end'>
                     {
-                        user && user?.photoURL && <>
-                            <div className="dropdown dropdown-end">
-                                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                                    <div className="w-10 rounded-full">
-                                        <img src={user?.photoURL} alt="user" />
-                                    </div>
-                                </label>
-                            </div>
-                        </>
+                        user?.uid ?
+                            <>
+                                {
+                                    user?.photoURL ?
+                                        <>
+                                            <div className="dropdown dropdown-end">
+                                                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                                                    <div className="w-10 rounded-full">
+                                                        <img src={user?.photoURL} alt={user.displayName} />
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </>
+                                        :
+                                        <>
+                                        </>
+                                }
+                            </>
+                            :
+                            <></>
                     }
                 </div>
                 <label htmlFor="dashboard" tabIndex={2} className="btn btn-ghost lg:hidden">

@@ -8,7 +8,7 @@ import { GoogleAuthProvider } from "firebase/auth";
 const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm()
     const [loginError, setLoginError] = useState('');
-    const { login, loginPopup } = useContext(AuthContext);
+    const { login, loginPopup, setLoading } = useContext(AuthContext);
     const location = useLocation()
     const navigate = useNavigate();
     const from = location.state?.from.pathname || '/';
@@ -26,7 +26,11 @@ const Login = () => {
             })
             .catch(err => {
                 console.error(err.message)
+                toast.error(err.message);
                 setLoginError(err);
+            })
+            .finally(() => {
+                setLoading(false);
             })
     }
 
@@ -43,7 +47,8 @@ const Login = () => {
             })
             .catch(err => {
                 console.log(err.message);
-                setLoginError(err)
+                setLoginError(err);
+                setLoading(false);
             })
     }
 

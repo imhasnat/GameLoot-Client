@@ -7,7 +7,7 @@ import toast from 'react-hot-toast';
 
 const SignUp = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { createUser, updateUser } = useContext(AuthContext);
+    const { createUser, updateUser, setUser, setLoading } = useContext(AuthContext);
     const [signupError, setSignupError] = useState('');
     const navigate = useNavigate();
 
@@ -18,7 +18,6 @@ const SignUp = () => {
         const image = data.image[0];
         const formData = new FormData();
         formData.append('image', image);
-        // const imageUrl = imageHost(image);
         setSignupError('');
         fetch(url, {
             method: 'POST',
@@ -32,26 +31,38 @@ const SignUp = () => {
 
                     createUser(data.email, data.password)
                         .then(async result => {
-                            console.log(result.user);
+                            const user = result.user;
+                            // console.log(result.user);
                             toast.success('User created Successfully');
                             const userInfo = {
                                 displayName: data.name,
                                 photoURL: imageUrl
                             }
                             await updateUser(userInfo)
-                                .then(async res => {
+                                .then(() => {
+                                    setUser(user);
                                     toast.success('Updated Successfully');
                                     saveUserDB(data.email, data.name, imageUrl, data.role);
                                 })
                                 .catch(err => {
                                     console.error(err.message);
+                                    setSignupError(err);
+                                })
+                                .finally(() => {
+                                    setLoading(false)
                                 })
                         })
                         .catch(err => {
                             console.error(err.message);
                             setSignupError(err);
+                            setLoading(false);
                         })
                 }
+            })
+            .catch(err => {
+                console.log(err);
+                setSignupError(err);
+                setLoading(false);
             })
     }
 
