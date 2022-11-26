@@ -14,17 +14,26 @@ const Navbar = () => {
     const navItem =
         <>
             <li><Link to={'/blog'}>Blog</Link></li>
-            <li><Link to={'/login'}>Login</Link></li>
-            <li><Link to={'/signup'}>SignUp</Link></li>
-            <li><Link><button onClick={handleLogout}>Logout</button></Link></li>
-            <li><Link to={'/dashboard/addproduct'}>Add Product</Link></li>
-            <li><Link to={'/dashboard/myproducts'}>My Products</Link></li>
-            <li><Link to={'/dashboard/myorders'}>My Orders</Link></li>
-            <li>
-                <div className="drawer-content">
-                    <label htmlFor="dashboard" className="lg:hidden">Dashboa</label>
-                </div>
-            </li>
+            {/* <li><Link to={'/signup'}>SignUp</Link></li> */}
+
+            <>
+                {
+                    user?.uid ?
+                        <>
+                            <li><Link to={'/dashboard'}>Dashboard</Link></li>
+                            {/* <li>
+                                <div className="drawer-content">
+                                    <label htmlFor="dashboard" className="lg:hidden">Dashboard</label>
+                                </div>
+                            </li> */}
+                            <li><Link><button onClick={handleLogout}>Logout</button></Link></li>
+                        </>
+                        :
+                        <>
+                            <li><Link to={'/login'}>Login</Link></li>
+                        </>
+                }
+            </>
         </>
 
     return (
@@ -50,27 +59,19 @@ const Navbar = () => {
                     {
                         user?.uid ?
                             <>
-                                {
-                                    user?.photoURL ?
-                                        <>
-                                            <div className="dropdown dropdown-end">
-                                                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                                                    <div className="w-10 rounded-full">
-                                                        <img src={user?.photoURL} alt={user?.displayName} />
-                                                    </div>
-                                                </label>
-                                            </div>
-                                        </>
-                                        :
-                                        <>
-                                        </>
-                                }
+                                <div className="dropdown dropdown-end">
+                                    <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                                        <div className="w-10 rounded-full">
+                                            <img src={user?.photoURL} alt={user?.displayName} />
+                                        </div>
+                                    </label>
+                                </div>
                             </>
                             :
                             <></>
                     }
                 </div>
-                <label htmlFor="dashboard" tabIndex={2} className="btn btn-ghost lg:hidden">
+                <label htmlFor="dashboard-drawer" tabIndex={2} className="btn btn-ghost lg:hidden">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                 </label>
             </div>

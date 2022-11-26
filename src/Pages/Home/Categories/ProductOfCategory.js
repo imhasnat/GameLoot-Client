@@ -7,6 +7,7 @@ import ProductCard from './ProductCard';
 const ProductOfCategory = () => {
     const { id } = useParams();
     const [product, setProduct] = useState(null)
+
     const { data: categoryProducts = [] } = useQuery({
         queryKey: ['categoryProducts'],
         queryFn: async () => {

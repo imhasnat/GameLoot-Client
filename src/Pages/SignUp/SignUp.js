@@ -38,7 +38,7 @@ const SignUp = () => {
                                 displayName: data.name,
                                 photoURL: imageUrl
                             }
-                            console.log(userInfo``);
+                            console.log(userInfo);
                             await updateUser(userInfo)
                                 .then(() => {
                                     setUser(user);
@@ -70,7 +70,7 @@ const SignUp = () => {
         if (role === 'seller') {
             user = {
                 name, email, img, role,
-                verification: false,
+                verified: false,
             };
         }
         else {

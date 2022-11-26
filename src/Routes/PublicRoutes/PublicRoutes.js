@@ -1,12 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
-
-
+import DashboardLayout from "../../Layout/DashboardLayout";
 import Main from "../../Layout/Main";
 import MyOrders from "../../Pages/Dashboard/Buyer/MyOrders";
+import Dashboard from "../../Pages/Dashboard/Dashboard";
 import AddProducts from "../../Pages/Dashboard/Seller/AddProducts";
 import ShowProducts from "../../Pages/Dashboard/Seller/ShowProducts";
-
-
 import ErrorPage from "../../Pages/ErrorPage/ErrorPage";
 import ProductOfCategory from "../../Pages/Home/Categories/ProductOfCategory";
 import Home from "../../Pages/Home/Home";
@@ -30,34 +28,37 @@ export const router = createBrowserRouter([
             {
                 path: '/signup',
                 element: <SignUp></SignUp>
-            }
-
+            },
+            {
+                path: '/category/:id',
+                element: <ProductOfCategory></ProductOfCategory>
+            },
         ]
     },
     {
-        path: '/category/:id',
-        element: <ProductOfCategory></ProductOfCategory>
+        path: '/dashboard',
+        element: <DashboardLayout></DashboardLayout>,
+        errorElement: <ErrorPage></ErrorPage>,
+        children: [
+            {
+                path: '/dashboard',
+                element: <Dashboard></Dashboard>,
+            },
+            // buyer
+            {
+                path: '/dashboard/myorders',
+                element: <MyOrders></MyOrders>
+            },
+            // seller
+            {
+                path: '/dashboard/addproduct',
+                element: <AddProducts></AddProducts>
+            },
+            {
+                path: '/dashboard/myproducts',
+                element: <ShowProducts></ShowProducts>
+            },
+            // admin
+        ]
     },
-    {
-        // path: '/dashboard',
-        // element: <Dashboard></Dashboard>,
-        // children: [
-        //     {
-        path: '/dashboard/addproduct',
-        element: <AddProducts></AddProducts>
-        //     },
-        //     {
-        //         path: '/dashboard/myproduct',
-        //         element: <AddProducts></AddProducts>
-        //     }
-        // ]
-    },
-    {
-        path: '/dashboard/myproducts',
-        element: <ShowProducts></ShowProducts>
-    },
-    {
-        path: '/dashboard/myorders',
-        element: <MyOrders></MyOrders>
-    }
 ])

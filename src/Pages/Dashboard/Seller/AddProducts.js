@@ -1,14 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../Contexts/AuthProvider/AuthProvider';
 
 const AddProducts = () => {
     const { user } = useContext(AuthContext);
     const { register, handleSubmit } = useForm();
-
+    const [seller, setSeller] = useState([])
     const imageHostKey = process.env.REACT_APP_imgbb_key;
     const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
+    const navigate = useNavigate();
 
     const [categories, setCategories] = useState([]);
     useEffect(() => {
@@ -18,6 +20,14 @@ const AddProducts = () => {
                 setCategories(data);
             })
     }, [])
+
+    useEffect(() => {
+        fetch(`${process.env.REACT_APP_Server_URL}/users/verified?email=${user?.email}`)
+            .then(res => res.json())
+            .then(data => {
+                setSeller(data);
+            })
+    }, [user?.email])
 
     const handleAddProduct = data => {
         console.log(data);
@@ -64,7 +74,8 @@ const AddProducts = () => {
                         imageUrl,
                         advertise: false,
                         status: true,
-                        date: new Date()
+                        date: new Date(),
+                        verified: seller[0].verified,
                     }
                     try {
                         const res = await fetch(`${process.env.REACT_APP_Server_URL}/products`, {
@@ -79,6 +90,7 @@ const AddProducts = () => {
                         console.log(data);
                         if (data.acknowledged) {
                             toast.success('Product Added Successfully');
+                            navigate('/dashboard/myproducts')
                         }
                     }
                     catch (err) {
