@@ -42,7 +42,7 @@ const Login = () => {
                 const email = result?.user?.email;
                 const name = result?.user?.displayName;
                 const img = result?.user?.photoURL;
-                const role = 'user';
+                const role = 'buyer';
                 saveUserDB(email, name, img, role);
             })
             .catch(err => {
@@ -75,6 +75,7 @@ const Login = () => {
         }
         catch (error) {
             console.log(error);
+            setLoginError(error.message);
         }
     }
 
@@ -88,7 +89,10 @@ const Login = () => {
                     navigate(from, { replace: true });
                 }
             })
-            .catch(err => console.log(err.message))
+            .catch(err => {
+                console.log(err.message)
+                setLoginError(err.message);
+            })
     }
 
     return (

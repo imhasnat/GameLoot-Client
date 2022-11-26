@@ -8,11 +8,11 @@ const DashboardLayout = () => {
     const { user } = useContext(AuthContext);
     const [role, setRole] = useState([]);
     // const [isAdmin] = useAdmin(user?.email)
-
     useEffect(() => {
         fetch(`${process.env.REACT_APP_Server_URL}/users/role?email=${user?.email}`)
             .then(res => res.json())
             .then(data => {
+                // console.log(data);
                 setRole(data);
             })
     }, [user?.email])

@@ -17,7 +17,7 @@ const BookingModal = ({ product, setProduct }) => {
         const location = form.location.value;
         const paid = false;
         const productId = _id;
-        console.log(userName, email, productName, price, mobile, location, paid, productId, status);
+        // console.log(userName, email, productName, price, mobile, location, paid, productId, status);
 
         const booking = { userName, email, productName, price, mobile, location, paid, imageUrl, productId, status };
 
@@ -30,16 +30,21 @@ const BookingModal = ({ product, setProduct }) => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                // console.log(data);
                 if (data.acknowledged) {
                     toast.success('Booking confirmed');
                     setProduct(null);
                 }
                 else {
                     toast.error(data.message);
+                    setProduct(null);
                 }
             })
-            .catch(err => console.error(err.message));
+            .catch(err => {
+                // console.error(err.message);
+                toast.error(err.message)
+                setProduct(null);
+            });
     }
 
     return (

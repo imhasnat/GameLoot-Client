@@ -6,6 +6,7 @@ import AllReportsProducts from "../../Pages/Dashboard/Admin/AllReportsProducts";
 import AllSellers from "../../Pages/Dashboard/Admin/AllSellers";
 import MyOrders from "../../Pages/Dashboard/Buyer/MyOrders";
 import Dashboard from "../../Pages/Dashboard/Dashboard";
+import Payment from "../../Pages/Dashboard/Payment/Payment";
 import AddProducts from "../../Pages/Dashboard/Seller/AddProducts";
 import ShowProducts from "../../Pages/Dashboard/Seller/ShowProducts";
 import ErrorPage from "../../Pages/ErrorPage/ErrorPage";
@@ -51,6 +52,11 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard/myorders',
                 element: <MyOrders></MyOrders>
+            },
+            {
+                path: '/dashboard/payment/:id',
+                element: <Payment></Payment>,
+                loader: ({ params }) => fetch(`${process.env.REACT_APP_Server_URL}/booking/${params.id}`)
             },
             // seller
             {
