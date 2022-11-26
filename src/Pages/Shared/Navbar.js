@@ -1,18 +1,22 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../Contexts/AuthProvider/AuthProvider';
 
 const Navbar = () => {
     const { user, logout } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const handleLogout = () => {
         logout()
-            .then(() => { })
+            .then(() => {
+                navigate('/');
+            })
             .catch(err => console.log(err))
     }
 
     const navItem =
         <>
+            <li><Link to={'/'}>Home</Link></li>
             <li><Link to={'/blog'}>Blog</Link></li>
             {/* <li><Link to={'/signup'}>SignUp</Link></li> */}
 
@@ -48,7 +52,7 @@ const Navbar = () => {
                             {navItem}
                         </ul>
                     </div>
-                    <Link className="btn btn-ghost normal-case text-xl">daisyUI</Link>
+                    <Link to={'/'} className="btn btn-ghost normal-case text-xl">daisyUI</Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal p-0">

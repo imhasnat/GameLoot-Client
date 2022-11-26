@@ -28,7 +28,7 @@ const ShowProducts = () => {
                             <th></th>
                             <th>Name</th>
                             <th>Price</th>
-                            <th>Payment</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -58,6 +58,7 @@ const ShowProducts = () => {
                                         product && !product.status && <button
                                             className='btn btn-xs btn-primary'>Sold</button>
                                     }
+
                                 </td>
                             </tr>)
                         }

@@ -1,9 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const ProductCard = ({ product, setProduct, report, setReport }) => {
+const ProductCard = ({ product, setProduct, setReportProduct }) => {
     const { title, description, imageUrl, resprice, orgprice, sellerName, location, date, verified } = product;
-    console.log(date);
     return (
         <div className="card w-80 bg-base-100 shadow-xl ">
             <figure><img src={imageUrl} alt={title} /></figure>
@@ -36,7 +35,7 @@ const ProductCard = ({ product, setProduct, report, setReport }) => {
                         <button className="btn btn-primary">
                             <label
                                 htmlFor="reporting-modal"
-                                onClick={() => setReport(report)}
+                                onClick={() => setReportProduct(product)}
                                 className="btn btn-primary text-white"
                             >Report</label>
                         </button>

@@ -3,10 +3,12 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import BookingModal from './BookingModal';
 import ProductCard from './ProductCard';
+import ReportingModal from './ReportingModal';
 
 const ProductOfCategory = () => {
     const { id } = useParams();
-    const [product, setProduct] = useState(null)
+    const [product, setProduct] = useState(null);
+    const [reportProduct, setReportProduct] = useState(null);
 
     const { data: categoryProducts = [] } = useQuery({
         queryKey: ['categoryProducts'],
@@ -21,13 +23,23 @@ const ProductOfCategory = () => {
         <div>
             <div className='grid grid-cols-3 gap-3'>
                 {
-                    categoryProducts?.map(product =>
-                        <ProductCard
-                            key={product._id}
-                            product={product}
-                            setProduct={setProduct}
-                        >
-                        </ProductCard>)
+                    categoryProducts.length > 0 ?
+                        <>
+                            {
+                                categoryProducts?.map(product =>
+                                    <ProductCard
+                                        key={product._id}
+                                        product={product}
+                                        setProduct={setProduct}
+                                        setReportProduct={setReportProduct}
+                                    >
+                                    </ProductCard>)
+                            }
+                        </>
+                        :
+                        <>
+                            <h1>There is no product added yet!</h1>
+                        </>
                 }
             </div>
             <div>
@@ -37,6 +49,15 @@ const ProductOfCategory = () => {
                         product={product}
                         setProduct={setProduct}
                     ></BookingModal>
+                }
+            </div>
+            <div>
+                {
+                    reportProduct &&
+                    <ReportingModal
+                        reportProduct={reportProduct}
+                        setReportProduct={setReportProduct}
+                    ></ReportingModal>
                 }
             </div>
         </div>

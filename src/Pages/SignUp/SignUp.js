@@ -42,7 +42,6 @@ const SignUp = () => {
                             await updateUser(userInfo)
                                 .then(() => {
                                     setUser(user);
-                                    toast.success('Updated Successfully');
                                     saveUserDB(data.email, data.name, imageUrl, data.role);
                                 })
                                 .catch(err => {
@@ -91,14 +90,12 @@ const SignUp = () => {
 
             //get Token 
             if (data.acknowledged) {
-                toast.success('Database save Successfull');
                 console.log('saved', data);
                 fetch(`${process.env.REACT_APP_Server_URL}/jwt?email=${email}`)
                     .then(res => res.json())
                     .then(data => {
                         if (data.accessToken) {
                             localStorage.setItem('accessToken', data.accessToken)
-                            toast.success('Local Storage save successfull');
                             navigate('/');
                         }
                     })
