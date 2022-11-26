@@ -16,42 +16,51 @@ const AllBuyers = () => {
         <div>
             <h3 className="text-3xl mb-5">All buyers</h3>
             <div className="overflow-x-auto">
-                <table className="table w-full">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>Name</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            buyers?.map((buyer, i) => <tr key={buyer._id}>
-                                <th>{i + 1}</th>
-                                <td><div className="flex items-center space-x-3">
-                                    <div className="avatar">
-                                        <div className="mask mask-squircle w-12 h-12">
-                                            <img src={buyer?.img} alt={buyer?.name} />
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div className="font-bold">{buyer?.name}</div>
-                                    </div>
-                                </div></td>
-                                <td>
+                {
+                    buyers?.length > 0 ?
+                        <>
+                            <table className="table w-full">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Name</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
                                     {
-                                        !buyer?.advertise &&
-                                        <button
-                                            className='btn btn-xs btn-primary'>Verify
-                                        </button>
-                                    }
-                                    <button className='btn btn-xs btn-primary'>Delete</button>
+                                        buyers?.map((buyer, i) => <tr key={buyer._id}>
+                                            <th>{i + 1}</th>
+                                            <td><div className="flex items-center space-x-3">
+                                                <div className="avatar">
+                                                    <div className="mask mask-squircle w-12 h-12">
+                                                        <img src={buyer?.img} alt={buyer?.name} />
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div className="font-bold">{buyer?.name}</div>
+                                                </div>
+                                            </div></td>
+                                            <td>
+                                                {
+                                                    !buyer?.advertise &&
+                                                    <button
+                                                        className='btn btn-xs btn-primary'>Verify
+                                                    </button>
+                                                }
+                                                <button className='btn btn-xs btn-primary'>Delete</button>
 
-                                </td>
-                            </tr>)
-                        }
-                    </tbody>
-                </table>
+                                            </td>
+                                        </tr>)
+                                    }
+                                </tbody>
+                            </table>
+                        </>
+                        :
+                        <>
+                            <h1>There is no buyers</h1>
+                        </>
+                }
             </div>
         </div>
     );
