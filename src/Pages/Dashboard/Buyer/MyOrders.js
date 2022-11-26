@@ -18,46 +18,53 @@ const MyOrders = () => {
         <div>
             <h3 className="text-3xl mb-5">My Orders</h3>
             <div className="overflow-x-auto">
-                <table className="table w-full">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>Name</th>
-                            <th>Price</th>
-                            <th>Payment</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            bookings?.map((booking, i) => <tr key={booking._id}>
-                                <th>{i + 1}</th>
-                                <td><div className="flex items-center space-x-3">
-                                    <div className="avatar">
-                                        <div className="mask mask-squircle w-12 h-12">
-                                            <img src={booking?.imageUrl} alt={booking?.productName} />
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div className="font-bold">{booking?.productName}</div>
-                                    </div>
-                                </div></td>
-                                <td>{booking?.price}</td>
-                                <td>
+                {
+                    bookings.length > 0 ?
+                        <>
+                            <table className="table w-full">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Name</th>
+                                        <th>Price</th>
+                                        <th>Payment</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
                                     {
-                                        booking && !booking?.paid && <Link
-                                            to={`/dashboard/payment/${booking._id}`}>
-                                            <button
-                                                className='btn btn-xs btn-primary'>Pay</button></Link>
+                                        bookings?.map((booking, i) => <tr key={booking._id}>
+                                            <th>{i + 1}</th>
+                                            <td><div className="flex items-center space-x-3">
+                                                <div className="avatar">
+                                                    <div className="mask mask-squircle w-12 h-12">
+                                                        <img src={booking?.imageUrl} alt={booking?.productName} />
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div className="font-bold">{booking?.productName}</div>
+                                                </div>
+                                            </div></td>
+                                            <td>{booking?.price}</td>
+                                            <td>
+                                                {
+                                                    booking && !booking?.paid && <Link
+                                                        to={`/dashboard/payment/${booking._id}`}>
+                                                        <button
+                                                            className='btn btn-xs btn-primary'>Pay</button></Link>
+                                                }
+                                                {
+                                                    booking && booking?.paid && <button
+                                                        className='btn btn-xs btn-primary'>Paid</button>
+                                                }
+                                            </td>
+                                        </tr>)
                                     }
-                                    {
-                                        booking && booking?.paid && <button
-                                            className='btn btn-xs btn-primary'>Paid</button>
-                                    }
-                                </td>
-                            </tr>)
-                        }
-                    </tbody>
-                </table>
+                                </tbody>
+                            </table>
+                        </>
+                        :
+                        <> <h1>You haven't order any product yet!</h1></>
+                }
             </div>
         </div>
     );

@@ -65,7 +65,6 @@ const SignUp = () => {
 
     const saveUserDB = async (email, name, img, role) => {
         let user;
-        console.log('role', role);
         if (role === 'seller') {
             user = {
                 name, email, img, role,
@@ -75,7 +74,6 @@ const SignUp = () => {
         else {
             user = { name, email, img, role };
         }
-        console.log(user);
 
         // save to Database
         try {
@@ -90,7 +88,6 @@ const SignUp = () => {
 
             //get Token 
             if (data.acknowledged) {
-                console.log('saved', data);
                 fetch(`${process.env.REACT_APP_Server_URL}/jwt?email=${email}`)
                     .then(res => res.json())
                     .then(data => {

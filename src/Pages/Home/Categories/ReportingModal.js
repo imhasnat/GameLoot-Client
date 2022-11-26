@@ -2,7 +2,7 @@ import React from 'react';
 import toast from 'react-hot-toast';
 
 const ReportingModal = ({ reportProduct, setReportProduct }) => {
-    const { _id, title, orgprice, status, imageUrl } = reportProduct;
+    const { _id, title, imageUrl } = reportProduct;
 
     const handleReport = () => {
         const reportInfo = {
