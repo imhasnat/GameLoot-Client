@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import ModalCommon from '../../Shared/ModalCommon';
+import VerifyModal from './VerifyModal';
 
 const AllSellers = () => {
     const [item, setItem] = useState(null);
@@ -45,9 +46,21 @@ const AllSellers = () => {
                                             </div></td>
                                             <td>
                                                 {
-                                                    !seller?.advertise &&
+                                                    !seller?.verified &&
+                                                    // <button
+                                                    //     className='btn btn-xs btn-primary'>Verify
+                                                    // </button>
+                                                    <label
+                                                        htmlFor="verify-modal"
+                                                        onClick={() => setItem(seller)}
+                                                        className="btn btn-xs btn-primary text-white"
+                                                    >Verify
+                                                    </label>
+                                                }
+                                                {
+                                                    seller?.verified &&
                                                     <button
-                                                        className='btn btn-xs btn-primary'>Verify
+                                                        className='btn btn-xs btn-primary'>Verified
                                                     </button>
                                                 }
                                                 <label
@@ -70,14 +83,20 @@ const AllSellers = () => {
             </div>
             {
                 item &&
-                <>
-                    <ModalCommon
-                        item={item}
-                        setItem={setItem}
-                        refetch={refetch}
-                        api={'seller'}
-                    ></ModalCommon>
-                </>
+                <ModalCommon
+                    item={item}
+                    setItem={setItem}
+                    refetch={refetch}
+                    api={'seller'}
+                ></ModalCommon>
+            }
+            {
+                item &&
+                <VerifyModal
+                    item={item}
+                    setItem={setItem}
+                    refetch={refetch}
+                ></VerifyModal>
             }
         </div>
     );
