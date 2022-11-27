@@ -1,7 +1,7 @@
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import React from 'react';
-import { useLoaderData, useNavigation, useParams } from 'react-router-dom';
+import { useLoaderData, useNavigation } from 'react-router-dom';
 import Loading from '../../Shared/Loading';
 import CheckoutForm from './CheckoutForm';
 

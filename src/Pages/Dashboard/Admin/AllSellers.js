@@ -1,7 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useState } from 'react';
+import ModalCommon from '../../Shared/ModalCommon';
 
 const AllSellers = () => {
+    const [item, setItem] = useState(null);
 
     const { data: sellers = [], refetch } = useQuery({
         queryKey: ['userRole'],
@@ -48,8 +50,12 @@ const AllSellers = () => {
                                                         className='btn btn-xs btn-primary'>Verify
                                                     </button>
                                                 }
-                                                <button className='btn btn-xs btn-primary'>Delete</button>
-
+                                                <label
+                                                    htmlFor="deleting-modal"
+                                                    onClick={() => setItem(seller)}
+                                                    className="btn btn-xs btn-primary text-white"
+                                                >Delete
+                                                </label>
                                             </td>
                                         </tr>)
                                     }
@@ -62,6 +68,17 @@ const AllSellers = () => {
                         </>
                 }
             </div>
+            {
+                item &&
+                <>
+                    <ModalCommon
+                        item={item}
+                        setItem={setItem}
+                        refetch={refetch}
+                        api={'seller'}
+                    ></ModalCommon>
+                </>
+            }
         </div>
     );
 };

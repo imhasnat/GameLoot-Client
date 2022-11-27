@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
+import { AuthContext } from '../../../Contexts/AuthProvider/AuthProvider';
 
 const ReportingModal = ({ reportProduct, setReportProduct }) => {
+    const { user } = useContext(AuthContext)
     const { _id, title, imageUrl } = reportProduct;
 
     const handleReport = () => {
@@ -9,6 +11,7 @@ const ReportingModal = ({ reportProduct, setReportProduct }) => {
             productId: _id,
             imageUrl,
             title,
+            email: user?.email
         }
         fetch(`${process.env.REACT_APP_Server_URL}/report`, {
             method: 'POST',
@@ -19,7 +22,7 @@ const ReportingModal = ({ reportProduct, setReportProduct }) => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                // console.log(data);
                 if (data.acknowledged) {
                     toast.success('Report Confirmed');
                     setReportProduct(null);

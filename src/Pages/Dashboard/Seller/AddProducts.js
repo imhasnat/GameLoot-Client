@@ -56,7 +56,7 @@ const AddProducts = () => {
             .then(res => res.json())
             .then(async imgData => {
                 if (imgData.success) {
-                    console.log(imgData.data.url);
+                    // console.log(imgData.data.url);
                     const imageUrl = imgData.data.url;
                     const productInfo = {
                         sellerName,
@@ -87,7 +87,7 @@ const AddProducts = () => {
                             body: JSON.stringify(productInfo)
                         });
                         const data = await res.json();
-                        console.log(data);
+                        // console.log(data);
                         if (data.acknowledged) {
                             toast.success('Product Added Successfully');
                             navigate('/dashboard/myproducts')

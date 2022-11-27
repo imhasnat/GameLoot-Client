@@ -1,7 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useState } from 'react';
+import ModalCommon from '../../Shared/ModalCommon';
 
 const AllBuyers = () => {
+    const [item, setItem] = useState(null);
 
     const { data: buyers = [], refetch } = useQuery({
         queryKey: ['userRole'],
@@ -42,14 +44,12 @@ const AllBuyers = () => {
                                                 </div>
                                             </div></td>
                                             <td>
-                                                {
-                                                    !buyer?.advertise &&
-                                                    <button
-                                                        className='btn btn-xs btn-primary'>Verify
-                                                    </button>
-                                                }
-                                                <button className='btn btn-xs btn-primary'>Delete</button>
-
+                                                <label
+                                                    htmlFor="deleting-modal"
+                                                    onClick={() => setItem(buyer)}
+                                                    className="btn btn-xs btn-primary text-white"
+                                                >Delete
+                                                </label>
                                             </td>
                                         </tr>)
                                     }
@@ -62,6 +62,17 @@ const AllBuyers = () => {
                         </>
                 }
             </div>
+            {
+                item &&
+                <>
+                    <ModalCommon
+                        item={item}
+                        setItem={setItem}
+                        refetch={refetch}
+                        api={'buyer'}
+                    ></ModalCommon>
+                </>
+            }
         </div>
     );
 };
