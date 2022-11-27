@@ -29,9 +29,13 @@ const ReportingModal = ({ reportProduct, setReportProduct }) => {
                 }
                 else {
                     toast.error(data.message);
+                    setReportProduct(null);
                 }
             })
-            .catch(err => console.error(err.message));
+            .catch(err => {
+                console.error(err.message)
+                setReportProduct(null);
+            });
     }
 
     return (
