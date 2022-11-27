@@ -21,10 +21,11 @@ const BookingModal = ({ product, setProduct }) => {
 
         const booking = { userName, email, productName, price, mobile, location, paid, imageUrl, productId, status };
 
-        fetch(`${process.env.REACT_APP_Server_URL}/booking`, {
+        fetch(`${process.env.REACT_APP_Server_URL}/booking?email=${user.email}`, {
             method: 'POST',
             headers: {
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
             },
             body: JSON.stringify(booking)
         })

@@ -3,6 +3,7 @@ import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../../Contexts/AuthProvider/AuthProvider';
 import Loading from '../../Shared/Loading';
 import ModalCommon from '../../Shared/ModalCommon';
+import AdvertiseModal from './AdvertiseModal';
 
 const ShowProducts = () => {
     const { user } = useContext(AuthContext);
@@ -68,9 +69,12 @@ const ShowProducts = () => {
                                             <td>
                                                 {
                                                     product && product.status && !product?.advertise &&
-                                                    <button
-                                                        className='btn btn-xs btn-primary'>Advertise
-                                                    </button>
+                                                    <label
+                                                        htmlFor="advertise-modal"
+                                                        onClick={() => setItem(product)}
+                                                        className="btn btn-xs btn-primary text-white"
+                                                    >Advertise
+                                                    </label>
                                                 }
                                                 {
                                                     product && product.status && product?.advertise &&
@@ -96,14 +100,20 @@ const ShowProducts = () => {
             </div>
             {
                 item &&
-                <>
-                    <ModalCommon
-                        item={item}
-                        setItem={setItem}
-                        refetch={refetch}
-                        api={'product'}
-                    ></ModalCommon>
-                </>
+                <ModalCommon
+                    item={item}
+                    setItem={setItem}
+                    refetch={refetch}
+                    api={'product'}
+                ></ModalCommon>
+            }
+            {
+                item &&
+                <AdvertiseModal
+                    item={item}
+                    setItem={setItem}
+                    refetch={refetch}
+                ></AdvertiseModal>
             }
         </div>
     );
