@@ -17,25 +17,25 @@ const Navbar = () => {
 
     const navItem =
         <>
-            <li><Link to={'/'}>Home</Link></li>
-            <li><Link to={'/blog'}>Blog</Link></li>
+            <li><Link to={'/'} className=' text-lg '>Home</Link></li>
+            <li><Link to={'/blog'} className=' text-lg'>Blog</Link></li>
             {/* <li><Link to={'/signup'}>SignUp</Link></li> */}
 
             <>
                 {
                     user?.uid ?
                         <>
-                            <li><Link to={'/dashboard'}>Dashboard</Link></li>
+                            <li><Link to={'/dashboard'} className=' text-lg'>Dashboard</Link></li>
                             {/* <li>
                                 <div className="drawer-content">
                                     <label htmlFor="dashboard" className="lg:hidden">Dashboard</label>
                                 </div>
                             </li> */}
-                            <li><Link><button onClick={handleLogout}>Logout</button></Link></li>
+                            <li><Link><button onClick={handleLogout} className=' text-lg'>Logout</button></Link></li>
                         </>
                         :
                         <>
-                            <li><Link to={'/login'}>Login</Link></li>
+                            <li><Link to={'/login'} className=' text-lg'>Login</Link></li>
                         </>
                 }
             </>
@@ -53,7 +53,7 @@ const Navbar = () => {
                             {navItem}
                         </ul>
                     </div>
-                    <Link to={'/'} className="btn btn-ghost normal-case text-xl">
+                    <Link to={'/'} className="btn btn-ghost normal-case">
                         <img src={logo} alt="logo" />
                     </Link>
                 </div>
