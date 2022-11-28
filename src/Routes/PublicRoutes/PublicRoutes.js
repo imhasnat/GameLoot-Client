@@ -10,6 +10,7 @@ import Payment from "../../Pages/Dashboard/Payment/Payment";
 import AddProducts from "../../Pages/Dashboard/Seller/AddProducts";
 import ShowProducts from "../../Pages/Dashboard/Seller/ShowProducts";
 import ErrorPage from "../../Pages/ErrorPage/ErrorPage";
+import Blog from "../../Pages/Home/Blog";
 import ProductOfCategory from "../../Pages/Home/Categories/ProductOfCategory";
 import Home from "../../Pages/Home/Home";
 import Login from "../../Pages/Login/Login";
@@ -38,6 +39,10 @@ export const router = createBrowserRouter([
                 path: '/category/:id',
                 element: <PrivateRoute><ProductOfCategory></ProductOfCategory></PrivateRoute>
             },
+            {
+                path: '/blog',
+                element: <Blog></Blog>
+            }
         ]
     },
     {
