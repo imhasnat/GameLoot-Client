@@ -4,7 +4,7 @@ import logo from '../../assets/logo.png'
 
 const Footer = () => {
     return (
-        <div className='mt-10'>
+        <div>
             <footer class="bg-white dark:bg-gray-900">
                 <div class="container px-6 py-8 mx-auto">
                     <div class="text-center">
