@@ -67,7 +67,7 @@ const Login = () => {
 
             //get Token 
             if (data.acknowledged) {
-                toast.success('Database save Successfull');
+                // toast.success('Database save Successfull');
                 console.log('saved', data);
                 getToken(email);
             }
@@ -85,7 +85,7 @@ const Login = () => {
             .then(data => {
                 if (data.accessToken) {
                     localStorage.setItem('accessToken', data.accessToken)
-                    toast.success('Local Storage save successfull');
+                    // toast.success('Local Storage save successfull');
                     navigate(from, { replace: true });
                 }
             })

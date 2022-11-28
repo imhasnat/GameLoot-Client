@@ -6,6 +6,7 @@ import { AuthContext } from '../../../Contexts/AuthProvider/AuthProvider';
 
 const AddProducts = () => {
     const { user } = useContext(AuthContext);
+    const [loading, setLoading] = useState(true);
     const { register, handleSubmit } = useForm();
     const [seller, setSeller] = useState([])
     const imageHostKey = process.env.REACT_APP_imgbb_key;
@@ -56,6 +57,7 @@ const AddProducts = () => {
             .then(res => res.json())
             .then(async imgData => {
                 if (imgData.success) {
+                    setLoading(true);
                     // console.log(imgData.data.url);
                     const imageUrl = imgData.data.url;
                     const productInfo = {
@@ -90,16 +92,18 @@ const AddProducts = () => {
                         // console.log(data);
                         if (data.acknowledged) {
                             toast.success('Product Added Successfully');
-                            navigate('/dashboard/myproducts')
+                            setLoading(false);
+                            navigate('/dashboard/myproducts');
                         }
                     }
                     catch (err) {
                         console.log(err.message);
+                        setLoading(false);
                     }
 
                 }
             })
-            .catch(err => console.log(err))
+            .catch(err => { console.log(err) })
 
     }
 

@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../../Contexts/AuthProvider/AuthProvider';
 import Loading from '../../Shared/Loading';
-import ModalCommon from '../../Shared/ModalCommon';
+import ReportDelete from './ReportDelete';
 
 const AllReportsProducts = () => {
     const { user } = useContext(AuthContext);
@@ -56,7 +56,7 @@ const AllReportsProducts = () => {
                                             </div></td>
                                             <td>
                                                 <label
-                                                    htmlFor="deleting-modal"
+                                                    htmlFor="report-modal"
                                                     onClick={() => setItem(report)}
                                                     className="btn btn-xs btn-primary text-white"
                                                 >Delete
@@ -74,12 +74,12 @@ const AllReportsProducts = () => {
             {
                 item &&
                 <>
-                    <ModalCommon
+                    <ReportDelete
                         item={item}
                         setItem={setItem}
                         refetch={refetch}
                         api={'report'}
-                    ></ModalCommon>
+                    ></ReportDelete>
                 </>
             }
         </div>
