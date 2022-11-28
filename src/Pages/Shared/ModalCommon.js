@@ -48,7 +48,7 @@ const ModalCommon = ({ item, setItem, refetch, api }) => {
             <div className="modal">
                 <div className="modal-box relative">
                     <label htmlFor="deleting-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-                    <h1 className='text-center font-semibold text-2xl my-10'>Confirm reporting this product</h1>
+                    <h1 className='text-center font-semibold text-2xl my-10'>Are you sure?</h1>
                     <br />
                     <div className='flex justify-between w-96 mx-auto'>
                         <input onClick={handleDelete} type="submit" value="Yes" className="btn btn-secondary w-40 input-bordered" />
