@@ -1,16 +1,22 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { AuthContext } from '../../../Contexts/AuthProvider/AuthProvider';
 import Loading from '../../Shared/Loading';
 import ModalCommon from '../../Shared/ModalCommon';
 import VerifyModal from './VerifyModal';
 
 const AllSellers = () => {
+    const { user } = useContext(AuthContext);
     const [item, setItem] = useState(null);
 
     const { data: sellers = [], refetch, isLoading } = useQuery({
         queryKey: ['userRole'],
         queryFn: async () => {
-            const res = await fetch(`${process.env.REACT_APP_Server_URL}/role/sellers`);
+            const res = await fetch(`${process.env.REACT_APP_Server_URL}/role/sellers`, {
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('accessToken')}`
+                }
+            });
             const data = await res.json();
             return data;
         }
@@ -31,6 +37,7 @@ const AllSellers = () => {
                                     <tr>
                                         <th></th>
                                         <th>Name</th>
+                                        <th>Email</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -48,6 +55,7 @@ const AllSellers = () => {
                                                     <div className="font-bold">{seller?.name}</div>
                                                 </div>
                                             </div></td>
+                                            <td>{seller.email}</td>
                                             <td>
                                                 {
                                                     !seller?.verified &&

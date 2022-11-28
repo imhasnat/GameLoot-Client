@@ -16,7 +16,8 @@ const ReportingModal = ({ reportProduct, setReportProduct }) => {
         fetch(`${process.env.REACT_APP_Server_URL}/report`, {
             method: 'POST',
             headers: {
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
             },
             body: JSON.stringify(reportInfo)
         })

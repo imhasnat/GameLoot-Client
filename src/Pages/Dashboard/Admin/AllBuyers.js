@@ -1,15 +1,21 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { AuthContext } from '../../../Contexts/AuthProvider/AuthProvider';
 import Loading from '../../Shared/Loading';
 import ModalCommon from '../../Shared/ModalCommon';
 
 const AllBuyers = () => {
+    const { user } = useContext(AuthContext);
     const [item, setItem] = useState(null);
 
     const { data: buyers = [], refetch, isLoading } = useQuery({
         queryKey: ['userRole'],
         queryFn: async () => {
-            const res = await fetch(`${process.env.REACT_APP_Server_URL}/role/buyers`);
+            const res = await fetch(`${process.env.REACT_APP_Server_URL}/role/buyers?email=${user?.email}`, {
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('accessToken')}`
+                }
+            });
             const data = await res.json();
             return data;
         }
