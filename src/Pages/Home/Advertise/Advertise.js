@@ -8,7 +8,7 @@ const Advertise = () => {
         queryFn: async () => {
             const res = await fetch(`${process.env.REACT_APP_Server_URL}/product/advertise`)
             const data = await res.json();
-            console.log(data);
+            // console.log(data);
             return data;
         }
     })

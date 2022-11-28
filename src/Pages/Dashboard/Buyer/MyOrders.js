@@ -5,11 +5,13 @@ import { AuthContext } from '../../../Contexts/AuthProvider/AuthProvider';
 
 const MyOrders = () => {
     const { user } = useContext(AuthContext);
+    console.log(user.email);
     const { data: bookings = [] } = useQuery({
         queryKey: ['booking'],
         queryFn: async () => {
             const res = await fetch(`${process.env.REACT_APP_Server_URL}/booking?email=${user.email}`);
             const data = await res.json();
+            console.log(data);
             return data;
         }
     })

@@ -1,20 +1,27 @@
 import React, { useEffect, useState } from 'react';
+import Loading from '../../Shared/Loading';
 import Category from './Category';
 
 const Categories = () => {
     const [categories, setCategories] = useState([]);
-
+    const [loading, setLoading] = useState(true);
     useEffect(() => {
+        setLoading(true);
         fetch(`${process.env.REACT_APP_Server_URL}/categories`)
             .then(res => res.json())
             .then(data => {
                 setCategories(data);
+                setLoading(false);
             })
     }, [])
 
+    if (loading) {
+        return <Loading></Loading>
+    }
+
     return (
         <div>
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3'>
+            <div className='w-10/12 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 items-center'>
                 {
                     categories?.map(category =>
                         <Category

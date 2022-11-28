@@ -14,6 +14,7 @@ import ProductOfCategory from "../../Pages/Home/Categories/ProductOfCategory";
 import Home from "../../Pages/Home/Home";
 import Login from "../../Pages/Login/Login";
 import SignUp from "../../Pages/SignUp/SignUp";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 export const router = createBrowserRouter([
     {
@@ -35,13 +36,13 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/category/:id',
-                element: <ProductOfCategory></ProductOfCategory>
+                element: <PrivateRoute><ProductOfCategory></ProductOfCategory></PrivateRoute>
             },
         ]
     },
     {
         path: '/dashboard',
-        element: <DashboardLayout></DashboardLayout>,
+        element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
         errorElement: <ErrorPage></ErrorPage>,
         children: [
             {

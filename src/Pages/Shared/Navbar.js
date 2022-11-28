@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../Contexts/AuthProvider/AuthProvider';
+import logo from '../../assets/logo.png'
 
 const Navbar = () => {
     const { user, logout } = useContext(AuthContext);
@@ -52,7 +53,9 @@ const Navbar = () => {
                             {navItem}
                         </ul>
                     </div>
-                    <Link to={'/'} className="btn btn-ghost normal-case text-xl">daisyUI</Link>
+                    <Link to={'/'} className="btn btn-ghost normal-case text-xl">
+                        <img src={logo} alt="logo" />
+                    </Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal p-0">
@@ -66,7 +69,7 @@ const Navbar = () => {
                                 <div className="dropdown dropdown-end">
                                     <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                                         <div className="w-10 rounded-full">
-                                            <img src={user?.photoURL} alt={user?.displayName} referrerPolicy="no-referrer" />
+                                            <img src={user?.photoURL} alt={''} title={user?.displayName} referrerPolicy="no-referrer" />
                                         </div>
                                     </label>
                                 </div>

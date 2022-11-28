@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import Loading from '../../Shared/Loading';
 import BookingModal from './BookingModal';
 import ProductCard from './ProductCard';
 import ReportingModal from './ReportingModal';
@@ -10,7 +11,7 @@ const ProductOfCategory = () => {
     const [product, setProduct] = useState(null);
     const [reportProduct, setReportProduct] = useState(null);
 
-    const { data: categoryProducts = [] } = useQuery({
+    const { data: categoryProducts = [], isLoading } = useQuery({
         queryKey: ['categoryProducts'],
         queryFn: async () => {
             const res = await fetch(`${process.env.REACT_APP_Server_URL}/products/${id}`);
@@ -18,6 +19,10 @@ const ProductOfCategory = () => {
             return data
         }
     })
+
+    if (isLoading) {
+        return <Loading></Loading>
+    }
 
     return (
         <div>
