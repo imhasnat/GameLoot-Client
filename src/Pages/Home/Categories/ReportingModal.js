@@ -44,11 +44,11 @@ const ReportingModal = ({ reportProduct, setReportProduct }) => {
             <div className="modal">
                 <div className="modal-box relative">
                     <label htmlFor="reporting-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-                    <h1>Confirm reporting this product</h1>
+                    <h1 className='text-center font-semibold text-2xl my-10'>Confirm reporting this product</h1>
                     <br />
                     <div className='flex justify-between w-96 mx-auto'>
-                        <input onClick={handleReport} type="submit" value="Report" className="btn btn-accent w-40 input-bordered" />
-                        <input onClick={() => { setReportProduct(null) }} type="submit" value="Cancel" className="btn btn-accent w-40 input-bordered" />
+                        <input onClick={handleReport} type="submit" value="Confirm" className="btn btn-secondary w-40 input-bordered text-white" />
+                        <input onClick={() => { setReportProduct(null) }} type="submit" value="Cancel" className="btn btn-secondary w-40 input-bordered text-white" />
                     </div>
                 </div>
             </div>
