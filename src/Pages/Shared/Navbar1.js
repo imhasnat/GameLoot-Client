@@ -4,17 +4,6 @@ import { AuthContext } from '../../Contexts/AuthProvider/AuthProvider';
 import logo from '../../assets/logo.png'
 
 const Navbar1 = () => {
-    const { user, logout } = useContext(AuthContext);
-    const navigate = useNavigate();
-
-    const handleLogout = () => {
-        logout()
-            .then(() => {
-                navigate('/');
-            })
-            .catch(err => console.log(err))
-    }
-
     return (
         <div>
             <div className="navbar bg-base-100 lg:hidden">

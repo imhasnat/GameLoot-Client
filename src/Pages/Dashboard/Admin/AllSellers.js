@@ -1,12 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
+import Loading from '../../Shared/Loading';
 import ModalCommon from '../../Shared/ModalCommon';
 import VerifyModal from './VerifyModal';
 
 const AllSellers = () => {
     const [item, setItem] = useState(null);
 
-    const { data: sellers = [], refetch } = useQuery({
+    const { data: sellers = [], refetch, isLoading } = useQuery({
         queryKey: ['userRole'],
         queryFn: async () => {
             const res = await fetch(`${process.env.REACT_APP_Server_URL}/role/sellers`);
@@ -14,6 +15,9 @@ const AllSellers = () => {
             return data;
         }
     })
+    if (isLoading) {
+        return <Loading></Loading>
+    }
 
     return (
         <div>

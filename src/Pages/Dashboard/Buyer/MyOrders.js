@@ -2,23 +2,28 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../Contexts/AuthProvider/AuthProvider';
+import Loading from '../../Shared/Loading';
 
 const MyOrders = () => {
     const { user } = useContext(AuthContext);
-    console.log(user.email);
-    const { data: bookings = [] } = useQuery({
+    // console.log(user.email);
+    const { data: bookings = [], isLoading } = useQuery({
         queryKey: ['booking'],
         queryFn: async () => {
             const res = await fetch(`${process.env.REACT_APP_Server_URL}/booking?email=${user.email}`);
             const data = await res.json();
-            console.log(data);
+            // console.log(data);
             return data;
         }
     })
 
+    if (isLoading) {
+        return <Loading></Loading>
+    }
+
     return (
-        <div>
-            <h3 className="text-3xl mb-5">My Orders</h3>
+        <div className='my-16 px-2 md:px-14'>
+            <h3 className="text-3xl mb-5 text-center">My <span className='text-primary font-bold'>Orders</span></h3>
             <div className="overflow-x-auto">
                 {
                     bookings.length > 0 ?
@@ -63,7 +68,7 @@ const MyOrders = () => {
                                                 }
                                                 {
                                                     !booking?.status && !booking?.paid && <p
-                                                        className='bg-primary text-white'>Item is bought by another buyer</p>
+                                                        className=''>Item is bought by another buyer</p>
                                                 }
 
                                             </td>

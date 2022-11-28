@@ -108,7 +108,7 @@ const AddProducts = () => {
             <div className='my-36'>
                 <div className='h-[800px] flex justify-center items-center'>
                     <div className='w-96 p-7 rounded-lg bg-white m-3'>
-                        <h2 className='text-xl text-center'>Add your product</h2>
+                        <h2 className='text-xl text-center'>Add your <span className='text-primary font-bold'>Product</span> </h2>
                         <form onSubmit={handleSubmit(handleAddProduct)}>
                             <div className="form-control w-full max-w-xs">
                                 <label className="label"> <span className="label-text">Product title</span></label>
@@ -207,7 +207,7 @@ const AddProducts = () => {
                                     className="file-input file-input-bordered file-input-sm w-full max-w-xs"
                                 />
                             </div>
-                            <input className='btn text-white transform bg-purple-500 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600 w-full' value="Add product" type="submit" />
+                            <input className='btn btn-primary w-full' value="Add product" type="submit" />
                         </form>
                     </div>
                 </div>

@@ -23,12 +23,12 @@ const ShowProducts = () => {
     })
 
     if (isLoading) {
-        <Loading></Loading>
+        return <Loading></Loading>
     }
 
     return (
-        <div>
-            <h3 className="text-3xl mb-5">My Products</h3>
+        <div className='my-16 px-2 md:px-14'>
+            <h3 className="text-center text-3xl mb-5">My <span className='text-primary font-bold'>Product</span> </h3>
             <div className="overflow-x-auto">
                 {
                     products.length > 0 ?

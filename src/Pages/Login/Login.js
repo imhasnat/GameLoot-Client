@@ -97,7 +97,7 @@ const Login = () => {
 
     return (
         <div>
-            <div className='h-[800px] flex justify-center items-center'>
+            <div className='my-16 flex justify-center items-center'>
                 <div className='w-96 p-7'>
                     <h2 className='text-xl text-center'>Login</h2>
                     <form onSubmit={handleSubmit(handleLogin)}>
@@ -123,12 +123,12 @@ const Login = () => {
                             <label className="label"> <span className="label-text">Forget Password?</span></label>
                             {errors.password && <p className='text-red-600'>{errors.password?.message}</p>}
                         </div>
-                        <input className='btn text-white transform bg-purple-500 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600 w-full' value="Login" type="submit" />
+                        <input className='btn btn-primary w-full' value="Login" type="submit" />
                         <div>
                             {loginError && <p className='text-red-600'>{loginError}</p>}
                         </div>
                     </form>
-                    <p>New to Doctors Portal <Link className='text-purple-500' to="/signup">Create new Account</Link></p>
+                    <p>New to Doctors Portal <Link className='text-primary font-semibold' to="/signup">Create new Account</Link></p>
                     <div className="divider">OR</div>
                     <button onClick={handleGoogleLogin} className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
                 </div>

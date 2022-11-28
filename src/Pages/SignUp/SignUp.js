@@ -106,7 +106,7 @@ const SignUp = () => {
 
     return (
         <div>
-            <div className='h-[800px] flex justify-center items-center'>
+            <div className='my-16 flex justify-center items-center'>
                 <div className='w-96 p-7 rounded-lg bg-white m-3'>
                     <h2 className='text-xl text-center'>Sign Up to Join Us</h2>
                     <form onSubmit={handleSubmit(handleSignUp)}>
@@ -161,12 +161,12 @@ const SignUp = () => {
                                 accept='image/*'
                             />
                         </div>
-                        <input className='btn text-white transform bg-purple-500 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600 w-full' value="Sign Up" type="submit" />
+                        <input className='btn btn-primary w-full' value="Sign Up" type="submit" />
                         <div>
                             {signupError && <p className='text-red-600'>{signupError}</p>}
                         </div>
                     </form>
-                    <p>Already have an account? <Link className='text-purple-500' to="/login">Login</Link></p>
+                    <p>Already have an account? <Link className='text-primary font-semibold' to="/login">Login</Link></p>
                 </div>
             </div>
         </div>
