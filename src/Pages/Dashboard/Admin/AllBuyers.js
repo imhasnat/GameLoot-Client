@@ -1,11 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
+import Loading from '../../Shared/Loading';
 import ModalCommon from '../../Shared/ModalCommon';
 
 const AllBuyers = () => {
     const [item, setItem] = useState(null);
 
-    const { data: buyers = [], refetch } = useQuery({
+    const { data: buyers = [], refetch, isLoading } = useQuery({
         queryKey: ['userRole'],
         queryFn: async () => {
             const res = await fetch(`${process.env.REACT_APP_Server_URL}/role/buyers`);
@@ -14,9 +15,13 @@ const AllBuyers = () => {
         }
     })
 
+    if (isLoading) {
+        return <Loading></Loading>
+    }
+
     return (
-        <div>
-            <h3 className="text-3xl mb-5">All buyers</h3>
+        <div className='my-16 px-2 md:px-14'>
+            <h3 className="text-3xl mb-5 text-center">All <span className='text-primary font-bold'>Buyers</span></h3>
             <div className="overflow-x-auto">
                 {
                     buyers?.length > 0 ?

@@ -20,8 +20,8 @@ const AllSellers = () => {
     }
 
     return (
-        <div>
-            <h3 className="text-3xl mb-5">All sellers</h3>
+        <div className='my-16 px-2 md:px-14'>
+            <h3 className="text-3xl mb-5 text-center">All <span className='text-primary font-bold'>Sellers</span></h3>
             <div className="overflow-x-auto">
                 {
                     sellers?.length > 0 ?
@@ -70,7 +70,7 @@ const AllSellers = () => {
                                                 <label
                                                     htmlFor="deleting-modal"
                                                     onClick={() => setItem(seller)}
-                                                    className="btn btn-xs btn-primary text-white"
+                                                    className="btn btn-xs btn-primary ml-1 text-white"
                                                 >Delete
                                                 </label>
                                             </td>

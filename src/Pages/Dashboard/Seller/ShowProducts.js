@@ -85,7 +85,7 @@ const ShowProducts = () => {
                                                 <label
                                                     htmlFor="deleting-modal"
                                                     onClick={() => setItem(product)}
-                                                    className="btn btn-xs btn-primary text-white"
+                                                    className="btn btn-xs btn-primary ml-1 text-white"
                                                 >Delete
                                                 </label>
                                             </td>
